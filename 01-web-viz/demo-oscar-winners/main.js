@@ -9,6 +9,6 @@ d3.csv("https://raw.githubusercontent.com/miotomita/lede-2022-dataviz/main/01-we
             .selectAll("option.opt")
             .data(years)
             .join("option")
-            .attr("class", "opt")
+            .attr("value", d =>d)
             .text(d => d)
     })
