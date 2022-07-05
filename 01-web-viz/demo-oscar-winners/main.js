@@ -11,4 +11,11 @@ d3.csv("https://raw.githubusercontent.com/miotomita/lede-2022-dataviz/main/01-we
             .join("option")
             .attr("value", d =>d)
             .text(d => d)
+        
+        d3.select("#result")
+            .on("click", () => {
+               const selectedYear = d3.select("#year").node().value;
+               const winner = data.filter(item => item.year ==selectedYear && item.winner ==="1")
+            })
+
     })
