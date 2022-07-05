@@ -1,5 +1,5 @@
-d3.csv("./oscars.csv")
+d3.csv("https://raw.githubusercontent.com/miotomita/lede-2022-dataviz/main/01-web-viz/demo-oscar-winners/oscars.csv")
     .then(data => {
-        const years = data.filter(item => item.winner === 1)
+        const years = data.filter(item => item.winner === "1").map(item => item.year)
         console.log(years)
     })
