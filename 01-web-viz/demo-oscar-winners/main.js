@@ -1,27 +1,56 @@
 d3.csv("https://raw.githubusercontent.com/miotomita/lede-2022-dataviz/main/01-web-viz/demo-oscar-winners/oscars.csv")
     .then(data => {
-        const years = data.filter(item => item.winner === "1")
-            .map(item => item.year)
-        
-        console.log(years)
 
+        // get a list of years
+        const options = data.filter((movie) => movie.winner == 1).map((movie) => movie.year)
+    
+        // d3 selects our element with id of "year"
         d3.select("#year")
+            // go and select our future "option" elements with the class "opt"
             .selectAll("option.opt")
-            .data(years)
+            // bind our data to that selection
+            .data(options)
+            // join to our selection
+            // this is the same as .enter().append("option")
             .join("option")
-            .attr("value", d =>d)
-            .text(d => d)
-        
-        d3.select("#result")
+            // give that option a class, so that it matches our original selection above: option.opt
+            .attr("class","opt")
+            // set the value as d which in this case is the year
+            .attr("value",(d) => d)
+            // set the text as d which in this case is the year
+            .text((d) => d);
+    
+      
+        // Select the button
+        d3.select("button")
+            // give it a click event listener
             .on("click", () => {
-               const selectedYear = d3.select("#year").node().value;
-               const winner = data.find(item => item.year ==selectedYear && item.winner ==="1")
-
-               d3.select(".movie")
-                .text(winner.name)
-
-               d3.select(".movie-sentence")
-                .classed("hide", false)
+                // Select movie-sentence and nominee-sentence
+                d3.selectAll(".movie-sentence, .nominee-sentence")
+                    // Remove the class hide
+                    .classed("hide", false)
+    
+                // Get the year value
+                const year = d3.select("#year").node().value
+    
+                // Filter the data for year and winner 
+                const filtered = data.filter((d) => d.year == year && d.winner == 1)
+    
+                // Select the element with the class movie
+                d3.select(".movie")
+                    //And set the text as the name of the first element
+                    .text(filtered[0].name)
+                
+                // How do I get the nominees!!!!????
+                const nominees = data.filter((d) => d.year == year && d.winner == "")
+                
+                d3.select(".nominee-list")
+                    .selectAll("p.nominee")
+                    .data(nominees)
+                    // .enter()
+                    // .append('p')
+                    .join("p")
+                    .attr("class","nominee")
+                    .text(nomineeMovie => nomineeMovie.name)
             })
-
-    })
+    }) 
