@@ -2,7 +2,7 @@
 //d3.csv("./GapminderData.csv").then(data => {
 
 //time-series data
-d3.csv("https://raw.githubusercontent.com/miotomita/lede-2022-dataviz/main/03-d3-animation/countries.csv").then(data => {
+d3.csv("https://raw.githubusercontent.com/mitchthorson/lede-2022-dataviz/main/03-d3-animation/demo-animated-chart/countries.csv").then(data => {
     //const:The const declaration creates a immutable (read-only) reference to a value
     //var variables can be re-declared and updated
     //let can be updated but not re-declared
